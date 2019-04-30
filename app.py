@@ -3,35 +3,35 @@ import json
 import logging
 import os
 import random
-import datetime
-import uuid
 import time
+import uuid
 
 from kafka import KafkaProducer
 
-
-EVENTS = [
-    'CC_BALANCE_PAYMENT',
-    'CC_TRANSACTION',
-    'DISPUTES',
-    'ONLINE_LOGIN',
-    'THIRD_PARTY_AUTO_PAY',
-    'PAYMENT',
-    'SYSTEM_TRIGGER',
-    'CUSTOMER_CALL_IN',
-    'CUSTOMER_SURVEY',
-    'ATM_WITHDRAWAL',
-    'ONLINE_PWD_CHG',
-    'ONLINE_BANKING_OPT_IN'
+EVENT_TEMPLATES = [
+    { "eventCategory": "CC_BALANCE_PAYMENT", "eventValue": "LATE_PAYMENT", "eventSource": "CUSTOMERCARE"},
+    { "eventCategory": "CC_BALANCE_PAYMENT", "eventValue": "MIN_DUE", "eventSource": "MOBLE"},
+    { "eventCategory": "CC_BALANCE_PAYMENT", "eventValue": "MIN_DUE", "eventSource": "WEBSITE"},
+    { "eventCategory": "CC_TRANSACTION", "eventValue": "AIRLINE_PURCHASE", "eventSource": "WEBSITE"},
+    { "eventCategory": "CC_TRANSACTION", "eventValue": "MERCHANT_PURCHASE", "eventSource": "POS"},
+    { "eventCategory": "CC_TRANSACTION", "eventValue": "HOTEL_PURCHASE", "eventSource": "POS"},
+    { "eventCategory": "CC_TRANSACTION", "eventValue": "ONLINE_PURCHASE", "eventSource": "WEBSITE"},
+    { "eventCategory": "DISPUTES", "eventValue": "CASE_CREATED", "eventSource": "IVR"},
+    { "eventCategory": "DISPUTES", "eventValue": "CASE_CLOSED", "eventSource": "IVR"},
+    { "eventCategory": "ONLINE_ACCOUNT", "eventValue": "PAYMENT_FAILURE", "eventSource": "CUSTOMERCARE"},
+    { "eventCategory": "ONLINE_ACCOUNT", "eventValue": "PAYMENT_SUCCESS", "eventSource": "CUSTOMERCARE"},
 ]
 
 
 
+CUSTOMER = [
+
+    'John',
+    'James'
+]
+
 def generate_event():
-    ret = {
-        'eventId': EVENTS[random.randint(0, 11)],
-        'eventDate': "2019-03-03"
-    }
+    ret = EVENT_TEMPLATES[random.randint(0, 10)]
     return ret
 
 
@@ -46,7 +46,7 @@ def main(args):
     logging.info('begin sending events')
     while True:
         logging.info(json.dumps(generate_event()).encode())
-        producer.send(args.topic, json.dumps(generate_event()).encode(), json.dumps("CUSTOMER_ID_234422").encode())
+        producer.send(args.topic, json.dumps(generate_event()).encode(), json.dumps(CUSTOMER[random.randint(0, 1)]).encode())
         time.sleep(10.0)
     logging.info('end sending events')
 
@@ -68,18 +68,18 @@ if __name__ == '__main__':
     logging.info('starting kafka-openshift-python emitter')
     parser = argparse.ArgumentParser(description='emit some stuff on kafka')
     parser.add_argument(
-            '--brokers',
-            help='The bootstrap servers, env variable KAFKA_BROKERS',
-            default='localhost:9092')
+        '--brokers',
+        help='The bootstrap servers, env variable KAFKA_BROKERS',
+        default='localhost:9092')
     parser.add_argument(
-            '--topic',
-            help='Topic to publish to, env variable KAFKA_TOPIC',
-            default='event-inp-stream')
+        '--topic',
+        help='Topic to publish to, env variable KAFKA_TOPIC',
+        default='event-input-stream')
     parser.add_argument(
-            '--rate',
-            type=int,
-            help='Lines per second, env variable RATE',
-            default=1)
+        '--rate',
+        type=int,
+        help='Lines per second, env variable RATE',
+        default=1)
     args = parse_args(parser)
     main(args)
     logging.info('exiting')
