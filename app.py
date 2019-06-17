@@ -19,7 +19,13 @@ EVENT_TEMPLATES = [
     { "eventCategory": "DISPUTES", "eventValue": "CASE_CREATED", "eventSource": "IVR"},
     { "eventCategory": "DISPUTES", "eventValue": "CASE_CLOSED", "eventSource": "IVR"},
     { "eventCategory": "ONLINE_ACCOUNT", "eventValue": "PAYMENT_FAILURE", "eventSource": "CUSTOMERCARE"},
-    { "eventCategory": "ONLINE_ACCOUNT", "eventValue": "PAYMENT_SUCCESS", "eventSource": "CUSTOMERCARE"},
+    { "eventCategory": "ONLINE_ACCOUNT", "eventValue": "PAYMENT_SUCCESS", "eventSource": "CUSTOMERCARE"}
+]
+
+
+ATM_EVENT = [
+    { "eventCategory": "ATM_WITHDRAWAL", "eventValue": "Geo-US", "eventSource": "ATM"}
+
 ]
 
 
@@ -35,6 +41,11 @@ def generate_event():
     return ret
 
 
+def generate_event_atm():
+    ret = ATM_EVENT[0]
+    return ret
+
+
 def main(args):
     logging.info('brokers={}'.format(args.brokers))
     logging.info('topic={}'.format(args.topic))
@@ -45,10 +56,13 @@ def main(args):
 
     logging.info('begin sending events')
     while True:
-        logging.info(json.dumps(CUSTOMER[random.randint(0, 1)]).encode() + json.dumps(generate_event()).encode())
+        logging.info(json.dumps(generate_event()).encode())
         producer.send(args.topic, json.dumps(generate_event()).encode(), json.dumps(CUSTOMER[random.randint(0, 1)]).encode())
+        producer.send("ATM_Withdrawal", json.dumps(generate_event_atm()).encode(), json.dumps(CUSTOMER[0]).encode())
         time.sleep(10.0)
     logging.info('end sending events')
+
+
 
 
 def get_arg(env, default):
@@ -70,7 +84,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--brokers',
         help='The bootstrap servers, env variable KAFKA_BROKERS',
-        default='my-cluster-kafka-brokers:9092')
+        default='localhost:9092')
     parser.add_argument(
         '--topic',
         help='Topic to publish to, env variable KAFKA_TOPIC',
