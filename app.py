@@ -9,9 +9,8 @@ import uuid
 from kafka import KafkaProducer
 
 CARD_NO= [
-    {"2345796540876432", "7766554433221198", "9856342187654321", "7777744433667790"
-        , "6538764975321765", "086543226688908"}
-]
+    "2345796540876432", "7766554433221198", "9856342187654321", "7777744433667790"
+        , "6538764975321765", "086543226688908"]
 
 
 
@@ -64,12 +63,12 @@ def generate_event(TXN_TS, CUST):
         'product': 'V',
         'cardNumber': CUST,
         'txnTS': TXN_TS,
-        'txnCntry': TXN_CTRY[random.randint(0,7)],
-        'txnType': MERCH_ID[random.randint(0,3)],
-        'pos':POS[random.randint(0,1)],
+        'txnCntry': TXN_CTRY[random.randint(0,8)],
+        'txnType': MERCH_ID[random.randint(0,4)],
+        'pos':POS[random.randint(0,2)],
         'mcc': 'MCC',
-        'merchId': MERCH_ID[random.randint(0,1)],
-        'destCard':CARD_NO[random.randint(0,4)]
+        'merchId': MERCH_ID[random.randint(0,2)],
+        'destCard':CARD_NO[random.randint(0,5)]
 
 
     }
@@ -87,7 +86,7 @@ def main(args):
     logging.info('begin sending events')
     while TXN_TS < time.time()*1000:
         TXN_TS = TXN_TS+TXN_INCREMENT
-        crdNo = CARD_NO[random.randint(0,4)]
+        crdNo = CARD_NO[random.randint(0,5)]
         producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
 
     logging.info('crdNo')
