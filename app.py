@@ -14,8 +14,7 @@ CARD_NO= [
 ]
 
 
-TXN_TS = 1562904000000
-TXN_INCREMENT = 100000
+
 
 
 
@@ -59,7 +58,7 @@ MERCH_ID = [
 
 
 def generate_event(TXN_TS, CUST):
-    TXN_TS += TXN_INCREMENT;
+
     ret = {
         'org': '1',
         'product': 'V',
@@ -76,6 +75,8 @@ def generate_event(TXN_TS, CUST):
     }
     return ret
 def main(args):
+    TXN_TS = 1562904000000
+    TXN_INCREMENT = 100000
     logging.info('brokers={}'.format(args.brokers))
     logging.info('topic={}'.format(args.topic))
     logging.info('rate={}'.format(args.rate))
