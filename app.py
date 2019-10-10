@@ -75,7 +75,7 @@ def generate_event(TXN_TS, CUST):
     return ret
 def main(args):
     TXN_TS = 1562904000000
-    TXN_INCREMENT = 36000000
+    TXN_INCREMENT = 3600500
     logging.info('brokers={}'.format(args.brokers))
     logging.info('topic={}'.format(args.topic))
     logging.info('rate={}'.format(args.rate))
