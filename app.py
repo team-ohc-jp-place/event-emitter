@@ -40,7 +40,7 @@ POS = [
 ]
 
 
-POS = [
+TXN_TYPE = [
 
     'Purchase',
     'ATM',
@@ -64,7 +64,7 @@ def generate_event(TXN_TS, CUST):
         'cardNumber': CUST,
         'txnTS': TXN_TS,
         'txnCntry': TXN_CTRY[random.randint(0,8)],
-        'txnType': MERCH_ID[random.randint(0,4)],
+        'txnType': TXN_TYPE[random.randint(0,4)],
         'pos':POS[random.randint(0,2)],
         'mcc': 'MCC',
         'merchId': MERCH_ID[random.randint(0,2)],
