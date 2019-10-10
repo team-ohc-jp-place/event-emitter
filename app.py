@@ -8,44 +8,73 @@ import uuid
 
 from kafka import KafkaProducer
 
-EVENT_TEMPLATES = [
-    { "eventCategory": "CC_BALANCE_PAYMENT", "eventValue": "LATE_PAYMENT", "eventSource": "CUSTOMERCARE"},
-    { "eventCategory": "CC_BALANCE_PAYMENT", "eventValue": "MIN_DUE", "eventSource": "MOBLE"},
-    { "eventCategory": "CC_BALANCE_PAYMENT", "eventValue": "MIN_DUE", "eventSource": "WEBSITE"},
-    { "eventCategory": "CC_TRANSACTION", "eventValue": "AIRLINE_PURCHASE", "eventSource": "WEBSITE"},
-    { "eventCategory": "CC_TRANSACTION", "eventValue": "MERCHANT_PURCHASE", "eventSource": "POS"},
-    { "eventCategory": "CC_TRANSACTION", "eventValue": "HOTEL_PURCHASE", "eventSource": "POS"},
-    { "eventCategory": "CC_TRANSACTION", "eventValue": "ONLINE_PURCHASE", "eventSource": "WEBSITE"},
-    { "eventCategory": "DISPUTES", "eventValue": "CASE_CREATED", "eventSource": "IVR"},
-    { "eventCategory": "DISPUTES", "eventValue": "CASE_CLOSED", "eventSource": "IVR"},
-    { "eventCategory": "ONLINE_ACCOUNT", "eventValue": "PAYMENT_FAILURE", "eventSource": "CUSTOMERCARE"},
-    { "eventCategory": "ONLINE_ACCOUNT", "eventValue": "PAYMENT_SUCCESS", "eventSource": "CUSTOMERCARE"}
+CARD_NO= [
+    {"2345796540876432", "7766554433221198", "9856342187654321", "7777744433667790"
+        , "6538764975321765", "086543226688908"}
 ]
 
 
-ATM_EVENT = [
-    { "eventCategory": "ATM_WITHDRAWAL", "eventValue": "Geo-US", "eventSource": "ATM"}
+TXN_TS = 1562904000000
+TXN_INCREMENT = 100000
 
+
+
+TXN_CTRY = [
+
+    'SG',
+    'TH',
+    'PH',
+    'MY',
+    'HK',
+    'BR',
+    'US',
+    'CA',
+    'IN'
 ]
 
 
 
-CUSTOMER = [
+POS = [
 
-    'John',
-    'James'
+    '9100',
+    '1234',
+    '1111'
 ]
 
-def generate_event():
-    ret = EVENT_TEMPLATES[random.randint(0, 10)]
+
+POS = [
+
+    'Purchase',
+    'ATM',
+    'MOBILE_CHG',
+    'cardReissue',
+    'addressChange'
+]
+
+MERCH_ID = [
+    'MERCH1','MERCH2','MERCH3'
+]
+
+
+
+
+def generate_event(TXN_TS, CUST):
+    TXN_TS += TXN_INCREMENT;
+    ret = {
+        'org': '1',
+        'product': 'V',
+        'cardNumber': CUST,
+        'txnTS': TXN_TS,
+        'txnCntry': TXN_CTRY[random.randint(0,8)],
+        'txnType': MERCH_ID[random.randint(0,4)],
+        'pos':POS[random.randint(0,2)],
+        'mcc': 'MCC',
+        'merchId': MERCH_ID[random.randint(0,2)],
+        'destCard':CARD_NO[random.randint(0,5)]
+
+
+    }
     return ret
-
-
-def generate_event_atm():
-    ret = ATM_EVENT[0]
-    return ret
-
-
 def main(args):
     logging.info('brokers={}'.format(args.brokers))
     logging.info('topic={}'.format(args.topic))
@@ -55,12 +84,13 @@ def main(args):
     producer = KafkaProducer(bootstrap_servers=args.brokers)
 
     logging.info('begin sending events')
-    while True:
-        logging.info(json.dumps(generate_event()).encode())
-        producer.send(args.topic, json.dumps(generate_event()).encode(), json.dumps(CUSTOMER[random.randint(0, 1)]).encode())
-        producer.send("ATM_Withdrawal", json.dumps(generate_event_atm()).encode(), json.dumps(CUSTOMER[0]).encode())
-        time.sleep(10.0)
-    logging.info('end sending events')
+    while TXN_TS < time.time()*1000:
+        TXN_TS = TXN_TS+TXN_INCREMENT
+        crdNo = CARD_NO[random.randint(0,5)]
+        producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
+
+    logging.info('crdNo')
+
 
 
 
