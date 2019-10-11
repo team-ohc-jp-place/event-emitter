@@ -57,12 +57,13 @@ MERCH_ID = [
 
 
 def generate_event(TXN_TS, CUST):
-
+    millis = int(round(time.time() * 1000))
     ret = {
+
         'org': '1',
         'product': 'V',
         'cardNumber': CUST,
-        'txnTS': time.time() * 1000,
+        'txnTS': millis,
         'txnCntry': TXN_CTRY[random.randint(0,8)],
         'txnType': TXN_TYPE[random.randint(0,4)],
         'pos':POS[random.randint(0,2)],
@@ -76,6 +77,7 @@ def generate_event(TXN_TS, CUST):
 def main(args):
     TXN_TS = 1562904000000
     TXN_INCREMENT = 3600000
+
     logging.info('brokers={}'.format(args.brokers))
     logging.info('topic={}'.format(args.topic))
     logging.info('rate={}'.format(args.rate))
