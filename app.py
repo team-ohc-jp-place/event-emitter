@@ -71,7 +71,8 @@ def generate_event(TXN_TS, CUST):
         'mcc': 'MCC',
         'merchId': MERCH_ID[random.randint(0,2)],
         'destCard':CARD_NO[random.randint(0,5)],
-        'txnAmt': random.randint(1000,10000000)
+        'txnAmt': random.randint(1000,10000000),
+        'transactionId':'TRAN'+random.randint(0,10000)
 
 
     }
