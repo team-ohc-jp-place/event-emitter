@@ -141,7 +141,7 @@ def main(args):
         crdNo = CARD_NO[random.randint(0,5)]
         logging.info(TXN_TS)
         producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
-        producer.send('outtopic', json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
+        producer.send('reftopic', json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
         time.sleep(0.5)
 
 def get_arg(env, default):
