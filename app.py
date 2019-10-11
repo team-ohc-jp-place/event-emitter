@@ -58,6 +58,7 @@ MERCH_ID = [
 
 def generate_event(TXN_TS, CUST):
     millis = int(round(time.time() * 1000))
+    logging.info(millis)
     ret = {
 
         'org': '1',
