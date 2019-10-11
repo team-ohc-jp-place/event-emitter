@@ -142,7 +142,7 @@ def main(args):
         logging.info(TXN_TS)
         producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
         producer.send('customer-topic', json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
-        time.sleep(random.random() * 4)
+        time.sleep(20)
 
 def get_arg(env, default):
     return os.getenv(env) if os.getenv(env, '') is not '' else default
