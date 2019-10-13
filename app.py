@@ -141,7 +141,7 @@ def main(args):
         crdNo = CARD_NO[random.randint(0,5)]
         logging.info(TXN_TS)
         producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
-        producer.send('all-txn-topic', json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
+        producer.send(args.histTopic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
         time.sleep(5)
 
 def get_arg(env, default):
@@ -153,6 +153,7 @@ def parse_args(parser):
     args.brokers = get_arg('KAFKA_BROKERS', args.brokers)
     args.topic = get_arg('KAFKA_TOPIC', args.topic)
     args.rate = get_arg('RATE', args.rate)
+    args.histTopic = get_arg('HIST_TOPIC', args.rate)
     return args
 
 
@@ -168,6 +169,10 @@ if __name__ == '__main__':
         '--topic',
         help='Topic to publish to, env variable KAFKA_TOPIC',
         default='event-input-stream')
+    parser.add_argument(
+        '--hist-topic',
+        help='Topic to publish to, env variable KAFKA_TOPIC',
+        default='hist-input-stream')
     parser.add_argument(
         '--rate',
         type=int,
