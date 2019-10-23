@@ -175,7 +175,7 @@ if __name__ == '__main__':
         help='Topic to publish to, env variable KAFKA_TOPIC',
         default='hist-input-stream')
     parser.add_argument(
-        '--',
+        '--rate',
         type=int,
         help='Lines per second, env variable RATE',
         default=1)
