@@ -126,7 +126,7 @@ def generate_event(TXN_TS, CUST):
     return ret
 def main(args):
     TXN_TS = 1562904000000
-    TXN_INCREMENT = 36000
+    TXN_INCREMENT = 360000
 
     logging.info('brokers={}'.format(args.brokers))
     logging.info('topic={}'.format(args.topic))
@@ -134,7 +134,6 @@ def main(args):
 
     logging.info('creating kafka producer')
     producer = KafkaProducer(bootstrap_servers=args.brokers)
-    cntr=0
 
     logging.info('begin sending events')
     while TXN_TS < (time.time() * 1000):
