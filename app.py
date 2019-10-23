@@ -71,7 +71,7 @@ def generate_event(TXN_TS, CUST):
         'mcc': 'MCC',
         'merchId': MERCH_ID[random.randint(0,2)],
         'destCard':CARD_NO[random.randint(0,5)],
-        'txnAmt': random.randint(1000.0),
+        'txnAmt': 1000.0,
         'transactionId':'TRAN'+str(random.randint(0,10000)),
         "dataWeight1": "abcdefghijklmnopqrstuvwxyz0123456789",
         "dataWeight2": "abcdefghijklmnopqrstuvwxyz0123456789",
