@@ -134,15 +134,17 @@ def main(args):
 
     logging.info('creating kafka producer')
     producer = KafkaProducer(bootstrap_servers=args.brokers)
+    cntr=0
 
     logging.info('begin sending events')
-    while TXN_TS < (time.time() * 1000):
+    while cntr < 100:
+        cntr = cntr+1
         TXN_TS = TXN_TS+TXN_INCREMENT
         crdNo = CARD_NO[random.randint(0,5)]
         logging.info(TXN_TS)
         producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
         producer.send(args.histTopic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
-        time.sleep(0.5)
+
 
 def get_arg(env, default):
     return os.getenv(env) if os.getenv(env, '') is not '' else default
@@ -174,7 +176,7 @@ if __name__ == '__main__':
         help='Topic to publish to, env variable KAFKA_TOPIC',
         default='hist-input-stream')
     parser.add_argument(
-        '--rate',
+        '--',
         type=int,
         help='Lines per second, env variable RATE',
         default=1)
