@@ -63,7 +63,7 @@ def generate_event(TXN_TS, CUST):
 
         'org': '1',
         'product': 'V',
-        'cardNumber': CUST,
+        'cardNumber':CARD_NO[random.randint(0,5)],
         'txnTS': millis,
         'txnCntry': TXN_CTRY[random.randint(0,8)],
         'txnType': TXN_TYPE[random.randint(0,4)],
