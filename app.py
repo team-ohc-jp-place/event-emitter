@@ -126,7 +126,7 @@ def generate_event(TXN_TS, CUST):
     return ret
 def main(args):
     TXN_TS = 1562904000000
-    TXN_INCREMENT = 3600000
+    TXN_INCREMENT = 36000
 
     logging.info('brokers={}'.format(args.brokers))
     logging.info('topic={}'.format(args.topic))
@@ -137,8 +137,8 @@ def main(args):
     cntr=0
 
     logging.info('begin sending events')
-    while cntr < 100:
-        cntr = cntr+1
+    while TXN_TS < (time.time() * 1000):
+
         TXN_TS = TXN_TS+TXN_INCREMENT
         crdNo = CARD_NO[random.randint(0,5)]
         logging.info(TXN_TS)
