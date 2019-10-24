@@ -140,10 +140,13 @@ def main(args):
 
         TXN_TS = TXN_TS+TXN_INCREMENT
         crdNo = CARD_NO[random.randint(0,5)]
+        cntr=1
         logging.info(TXN_TS)
+        logging.info(cntr)
         producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
         producer.send(args.histTopic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
-
+        cntr = cntr +1
+        time.sleep(1.0 / 100)
 
 def get_arg(env, default):
     return os.getenv(env) if os.getenv(env, '') is not '' else default
