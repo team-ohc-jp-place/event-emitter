@@ -136,7 +136,7 @@ def main(args):
     producer = KafkaProducer(bootstrap_servers=args.brokers)
 
     logging.info('begin sending events')
-    while TXN_TS < (time.time() * 1000):
+    while 1 == 1:
 
         TXN_TS = TXN_TS+TXN_INCREMENT
         crdNo = CARD_NO[random.randint(0,5)]
