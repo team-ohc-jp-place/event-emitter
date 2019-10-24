@@ -142,8 +142,8 @@ def main(args):
         TXN_TS = TXN_TS+TXN_INCREMENT
         crdNo = CARD_NO[random.randint(0,5)]
 
-        logging.info(TXN_TS)
-        logging.info(cntr)
+        logging.info('TransactionId {0} and Txn Timestamp {1}'.format(TXN_TS, cntr))
+
         producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
         producer.send(args.histTopic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
         cntr = int(cntr) + 1
