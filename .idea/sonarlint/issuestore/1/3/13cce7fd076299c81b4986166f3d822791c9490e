@@ -1,4 +1,4 @@
 
-upython:S117;"RRename this parameter "TXN_TS" to match the regular expression ^[_a-z][a-z0-9_]*$.(¦ÎÌÿÿÿÿÿ8»Ã¨±Û-
+zpython:S117"VRename this local variable "crdNo" to match the regular expression ^[_a-z][a-z0-9_]*$.(êôæèüÿÿÿÿ8ƒŒÊ±Û-
 spython:S117;"PRename this parameter "CUST" to match the regular expression ^[_a-z][a-z0-9_]*$.(¦ÎÌÿÿÿÿÿ8Çí·±Û-
-zpython:S117"VRename this local variable "crdNo" to match the regular expression ^[_a-z][a-z0-9_]*$.(êôæèüÿÿÿÿ8ƒŒÊ±Û-
+upython:S117;"RRename this parameter "TXN_TS" to match the regular expression ^[_a-z][a-z0-9_]*$.(¦ÎÌÿÿÿÿÿ8»Ã¨±Û-
