@@ -136,7 +136,7 @@ def main(args):
     producer = KafkaProducer(bootstrap_servers=args.brokers)
 
     logging.info('begin sending events')
-    while 1 == 1:
+    while True:
 
         TXN_TS = TXN_TS+TXN_INCREMENT
         crdNo = CARD_NO[random.randint(0,5)]
@@ -145,7 +145,7 @@ def main(args):
         logging.info(cntr)
         producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
         producer.send(args.histTopic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
-        cntr = (int)cntr +1
+        cntr = (int)cntr + 1
         time.sleep(1.0 / 100)
 
 def get_arg(env, default):
