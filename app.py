@@ -72,7 +72,7 @@ def generate_event(TXN_TS, CUST, cntr):
         'merchId': MERCH_ID[random.randint(0,2)],
         'destCard':CARD_NO[random.randint(0,5)],
         'txnAmt': 1000.0,
-        'transactionId':'TRAN'+int(cntr),
+        'transactionId':'TRAN'+str(cntr),
         "dataWeight1": "abcdefghijklmnopqrstuvwxyz0123456789",
         "dataWeight2": "abcdefghijklmnopqrstuvwxyz0123456789",
         "dataWeight3": "abcdefghijklmnopqrstuvwxyz0123456789",
