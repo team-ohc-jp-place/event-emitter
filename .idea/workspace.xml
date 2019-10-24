@@ -17,8 +17,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="145" column="8" selection-start-line="145" selection-start-column="8" selection-end-line="145" selection-end-column="8" />
+            <state relative-caret-position="283">
+              <caret line="147" column="95" selection-start-line="147" selection-start-column="95" selection-end-line="147" selection-end-column="95" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -55,6 +55,7 @@
       <find>KAFKA_BROKERS</find>
       <find>cardNumber</find>
       <find>rate</find>
+      <find>logging</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -412,8 +413,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="145" column="8" selection-start-line="145" selection-start-column="8" selection-end-line="145" selection-end-column="8" />
+        <state relative-caret-position="283">
+          <caret line="147" column="95" selection-start-line="147" selection-start-column="95" selection-end-line="147" selection-end-column="95" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

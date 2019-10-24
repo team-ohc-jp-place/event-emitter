@@ -56,7 +56,7 @@ MERCH_ID = [
 
 
 
-def generate_event(TXN_TS, CUST):
+def generate_event(TXN_TS, CUST, cntr):
     millis = int(round(time.time() * 1000))
 
     ret = {
@@ -72,7 +72,7 @@ def generate_event(TXN_TS, CUST):
         'merchId': MERCH_ID[random.randint(0,2)],
         'destCard':CARD_NO[random.randint(0,5)],
         'txnAmt': 1000.0,
-        'transactionId':'TRAN'+str(random.randint(0,10000)),
+        'transactionId':'TRAN'+int(cntr),
         "dataWeight1": "abcdefghijklmnopqrstuvwxyz0123456789",
         "dataWeight2": "abcdefghijklmnopqrstuvwxyz0123456789",
         "dataWeight3": "abcdefghijklmnopqrstuvwxyz0123456789",
@@ -144,8 +144,8 @@ def main(args):
 
         logging.info('TransactionId {0} and Txn Timestamp {1}'.format(TXN_TS, cntr))
 
-        producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
-        producer.send(args.histTopic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo)).encode(), json.dumps(crdNo).encode())
+        producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo,cntr)).encode(), json.dumps(crdNo).encode())
+        producer.send(args.histTopic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo,cntr)).encode(), json.dumps(crdNo).encode())
         cntr = int(cntr) + 1
         time.sleep(1.0 / 100)
 
