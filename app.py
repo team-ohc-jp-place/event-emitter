@@ -97,7 +97,7 @@ def main(args):
 
         logging.info('TransactionId {0} and Txn Timestamp {1}'.format(cntr,int(round(time.time() * 1000))))
 
-        producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo,cntr)).encode(), json.dumps(crdNo).encode())
+        producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo,cntr)).encode(), json.dumps('TRAN'+str(cntr)).encode())
         cntr = int(cntr) + 1
         time.sleep(1.0 / 1)
 
