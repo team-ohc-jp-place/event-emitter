@@ -99,7 +99,7 @@ def main(args):
 
         producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo,cntr)).encode(), json.dumps(crdNo).encode())
         cntr = int(cntr) + 1
-        time.sleep(1.0 / 100)
+        time.sleep(1.0 / 1)
 
 def get_arg(env, default):
     return os.getenv(env) if os.getenv(env, '') is not '' else default
