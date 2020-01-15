@@ -33,7 +33,7 @@ CUSTOMER = [
 ]
 
 def generate_event():
-    ret = EVENT_TEMPLATES[random.randint(0, 10)]
+    ret = EVENT_TEMPLATES[random.randint(0, 6)]
     return ret
 
 
@@ -50,7 +50,7 @@ def main(args):
     logging.info('begin sending events')
     while True:
         logging.info(json.dumps(generate_event()).encode())
-        producer.send(args.topic, json.dumps(generate_event()).encode(), json.dumps(CUSTOMER[random.randint(0, 1)]).encode())
+        producer.send(args.topic, json.dumps(generate_event()).encode(), json.dumps(CUSTOMER[random.randint(0, 6)]).encode())
         time.sleep(100.0)
     logging.info('end sending events')
 
