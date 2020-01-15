@@ -8,78 +8,38 @@ import uuid
 
 from kafka import KafkaProducer
 
-CARD_NO= [
-    "2345796540876432", "7766554433221198", "9856342187654321", "7777744433667790"
-        , "6538764975321765", "086543226688908"]
+EVENT_TEMPLATES = [
 
+    {  "eventValue": "AIRLINES", "eventSource": "WEBSITE"},
+    { "eventValue": "MERCHANDISE", "eventSource": "POS"},
+    {  "eventValue": "HOTEL", "eventSource": "POS"},
+    { "eventValue": "ONLINE_PURCHASE", "eventSource": "WEBSITE"},
+    { "eventValue": "UTILITIES", "eventSource": "WEBSITE"},
+    { "eventValue": "RESTAURANTS", "eventSource": "WEBSITE"},
+    { "eventValue": "OTHERS", "eventSource": "WEBSITE"}
 
-
-
-
-
-TXN_CTRY = [
-
-    'SG',
-    'TH',
-    'PH',
-    'MY',
-    'HK',
-    'BR',
-    'US',
-    'CA',
-    'IN'
 ]
 
 
+CUSTOMER = [
 
-POS = [
-
-    '9100',
-    '1234',
-    '1111'
+    'CUST898920',
+    'CUST898976',
+    'CUST898700',
+    'CUST898990',
+    'CUST892220',
+    'CUST898656',
+    'CUST894320'
 ]
 
-
-TXN_TYPE = [
-
-    'Purchase',
-    'ATM',
-    'MOBILE_CHG',
-    'cardReissue',
-    'addressChange'
-]
-
-MERCH_ID = [
-    'MERCH1','MERCH2','MERCH3'
-]
-
-
-
-
-def generate_event(TXN_TS, CUST, cntr):
-    millis = int(round(time.time() * 1000))
-
-    ret = {
-
-        'org': '1',
-        'product': 'V',
-        'cardNumber':CARD_NO[random.randint(0,5)],
-        'txnTS': millis,
-        'txnCntry': TXN_CTRY[random.randint(0,8)],
-        'txnType': TXN_TYPE[random.randint(0,4)],
-        'pos':POS[random.randint(0,2)],
-        'mcc': 'MCC',
-        'merchId': MERCH_ID[random.randint(0,2)],
-        'destCard':CARD_NO[random.randint(0,5)],
-        'txnAmt': 1000.0,
-        'transactionId':'TRAN'+str(cntr)
-
-    }
+def generate_event():
+    ret = EVENT_TEMPLATES[random.randint(0, 10)]
     return ret
-def main(args):
-    TXN_TS = 1562904000000
-    TXN_INCREMENT = 360000
 
+
+
+
+def main(args):
     logging.info('brokers={}'.format(args.brokers))
     logging.info('topic={}'.format(args.topic))
     logging.info('rate={}'.format(args.rate))
@@ -88,18 +48,14 @@ def main(args):
     producer = KafkaProducer(bootstrap_servers=args.brokers)
 
     logging.info('begin sending events')
-
-    cntr=1
     while True:
+        logging.info(json.dumps(generate_event()).encode())
+        producer.send(args.topic, json.dumps(generate_event()).encode(), json.dumps(CUSTOMER[random.randint(0, 1)]).encode())
+        time.sleep(100.0)
+    logging.info('end sending events')
 
-        TXN_TS = TXN_TS+TXN_INCREMENT
-        crdNo = CARD_NO[random.randint(0,5)]
 
-        logging.info('TransactionId {0} and Txn Timestamp {1}'.format(cntr,int(round(time.time() * 1000))))
 
-        producer.send(args.topic, json.dumps(generate_event(TXN_TS+TXN_INCREMENT,crdNo,cntr)).encode(), json.dumps('TRAN'+str(cntr)).encode())
-        cntr = int(cntr) + 1
-        time.sleep(1.0 / 1)
 
 def get_arg(env, default):
     return os.getenv(env) if os.getenv(env, '') is not '' else default
@@ -110,7 +66,6 @@ def parse_args(parser):
     args.brokers = get_arg('KAFKA_BROKERS', args.brokers)
     args.topic = get_arg('KAFKA_TOPIC', args.topic)
     args.rate = get_arg('RATE', args.rate)
-    args.histTopic = get_arg('HIST_TOPIC', args.rate)
     return args
 
 
@@ -126,10 +81,6 @@ if __name__ == '__main__':
         '--topic',
         help='Topic to publish to, env variable KAFKA_TOPIC',
         default='event-input-stream')
-    parser.add_argument(
-        '--hist-topic',
-        help='Topic to publish to, env variable KAFKA_TOPIC',
-        default='hist-input-stream')
     parser.add_argument(
         '--rate',
         type=int,
