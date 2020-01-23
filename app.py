@@ -53,7 +53,7 @@ def main(args):
         customer = CUSTOMER[random.randint(0, 6)]
         logging.info('Customer %s :: Event%s',customer,event)
         producer.send(args.topic, json.dumps(event).encode(), json.dumps(customer).encode())
-        time.sleep(10.0)
+        time.sleep(1.0)
     logging.info('end sending events')
 
 
