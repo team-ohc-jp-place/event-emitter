@@ -28,8 +28,7 @@ CUSTOMER = [
     'CUST898700',
     'CUST898990',
     'CUST892220',
-    'CUST898656',
-    'CUST894320'
+    'CUST898656'
 ]
 
 def generate_event():
