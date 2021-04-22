@@ -57,7 +57,7 @@ CUSTOMER = [
 ]
 
 def generate_event():
-    ret = EVENT_TEMPLATES[random.randint(0, 6)]
+    ret = EVENT_TEMPLATES[random.randint(0, 3)]
     return ret
 
 
