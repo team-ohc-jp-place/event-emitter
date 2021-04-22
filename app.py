@@ -10,13 +10,39 @@ from kafka import KafkaProducer
 
 EVENT_TEMPLATES = [
 
-    {  "eventValue": "AIRLINES", "eventSource": "WEBSITE"},
-    { "eventValue": "MERCHANDISE", "eventSource": "POS"},
-    {  "eventValue": "HOTEL", "eventSource": "POS"},
-    { "eventValue": "ONLINE_PURCHASE", "eventSource": "WEBSITE"},
-    { "eventValue": "UTILITIES", "eventSource": "WEBSITE"},
-    { "eventValue": "RESTAURANTS", "eventSource": "WEBSITE"},
-    { "eventValue": "OTHERS", "eventSource": "WEBSITE"}
+    {
+     "custId":"CUST8888",
+     "transactionAmount":5000,
+     "transactionDate":1619019292673,
+     "merchantName":"MERCH0002",
+     "transactionCountry":"CHINA"
+
+    },
+
+    {
+         "custId":"CUST99999",
+         "transactionAmount":1000,
+         "transactionDate":1619019292673,
+         "merchantName":"MERCH7899",
+         "transactionCountry":"SYRIA"
+
+        },
+        {
+             "custId":"CUST8888",
+             "transactionAmount":6000,
+             "transactionDate":1619019292673,
+             "merchantName":"MERCH7777",
+             "transactionCountry":"UK"
+
+            },
+            {
+                 "custId":"CUST44434",
+                 "transactionAmount":1200,
+                 "transactionDate":1619019292673,
+                 "merchantName":"MERCH0007",
+                 "transactionCountry":"SUDAN"
+
+                }
 
 ]
 
@@ -24,12 +50,10 @@ EVENT_TEMPLATES = [
 CUSTOMER = [
 
 
-    'CUST898976',
-    'CUST898700',
-    'CUST898990',
-    'CUST892220',
-    'CUST898656',
-    'CUST894320'
+    'CUST44434',
+    'CUST8888',
+    'CUST99999',
+    'CUST8888'
 ]
 
 def generate_event():
