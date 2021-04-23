@@ -4,12 +4,7 @@ A Python source-to-image application for emitting to an Apache Kafka topic
 ## Launching on OpenShift
 
 ```
-oc new-app centos/python-36-centos7~https://github.com/elmiko/event-stream-decisions \
-  --context-dir event-emitter \
-  -e KAFKA_BROKERS=kafka:9092 \
-  -e KAFKA_TOPIC=events \
-  -e RATE=1 \
-  --name=emitter
+oc new-app centos/python-36-centos7~https://github.com/snandakumar87/txn-event-emitter -e KAFKA_BROKERS=my-cluster-kafka-brokers:9092-e KAFKA_TOPIC=transaction-history -e RATE=1 --name=emitter
 ```
 
 You will need to adjust the `KAFKA_BROKERS` and `KAFKA_TOPICS` variables to

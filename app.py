@@ -29,10 +29,10 @@ def main(args):
 
     logging.info('begin sending events')
 
-        event = generate_event()
-        logging.info('Customer %s :: Event%s',customer,event)
-        producer.send(args.topic, json.dumps(event).encode())
-     logging.info('end sending events')
+    event = generate_event()
+    logging.info('Customer %s :: Event%s',customer,event)
+    producer.send(args.topic, json.dumps(event).encode())
+    logging.info('end sending events')
 
 
 
