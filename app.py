@@ -8,30 +8,46 @@ import uuid
 
 from kafka import KafkaProducer
 
+EVENT_TEMPLATES = [
+
+   {
+     "transactionId":"TXN866",
+     "transactionAmount":4000,
+     "transactionCountry":"USA",
+     "customerId":"CUST8788"
+
+   }
+]
+
+
+CUSTOMER = [
+
+
+    'CUST8788'
+]
 
 def generate_event():
-    ret = {
-            "transactionId":"TXN866",
-            "transactionAmount":4000,
-            "transactionCountry":"USA",
-            "customerId":"CUST8788"
-
-          }
+    ret = EVENT_TEMPLATES[random.randint(0, 1)]
     return ret
 
 
 
 
 def main(args):
+    logging.info('brokers={}'.format(args.brokers))
+    logging.info('topic={}'.format(args.topic))
+    logging.info('rate={}'.format(args.rate))
 
     logging.info('creating kafka producer')
     producer = KafkaProducer(bootstrap_servers=args.brokers)
 
     logging.info('begin sending events')
-
-    event = generate_event()
-    logging.info('Customer %s :: Event%s',customer,event)
-    producer.send(args.topic, json.dumps(event).encode())
+    while True:
+        event = generate_event()
+        customer = CUSTOMER[random.randint(0, 1)]
+        logging.info('Customer %s :: Event%s',customer,event)
+        producer.send(args.topic, json.dumps(event).encode(), json.dumps(customer).encode())
+        time.sleep(100000.0)
     logging.info('end sending events')
 
 
