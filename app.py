@@ -8,77 +8,31 @@ import uuid
 
 from kafka import KafkaProducer
 
-EVENT_TEMPLATES = [
-
-    {
-     "custId":"CUST8888",
-     "transactionAmount":5000,
-     "transactionDate":1619019292673,
-     "merchantName":"MERCH0002",
-     "transactionCountry":"CHINA"
-
-    },
-
-    {
-         "custId":"CUST99999",
-         "transactionAmount":1000,
-         "transactionDate":1619019292673,
-         "merchantName":"MERCH7899",
-         "transactionCountry":"SYRIA"
-
-        },
-        {
-             "custId":"CUST8888",
-             "transactionAmount":6000,
-             "transactionDate":1619019292673,
-             "merchantName":"MERCH7777",
-             "transactionCountry":"UK"
-
-            },
-            {
-                 "custId":"CUST44434",
-                 "transactionAmount":1200,
-                 "transactionDate":1619019292673,
-                 "merchantName":"MERCH0007",
-                 "transactionCountry":"SUDAN"
-
-                }
-
-]
-
-
-CUSTOMER = [
-
-
-    'CUST44434',
-    'CUST8888',
-    'CUST99999',
-    'CUST8888'
-]
 
 def generate_event():
-    ret = EVENT_TEMPLATES[random.randint(0, 3)]
+    ret = {
+            "transactionId":"TXN866",
+            "transactionAmount":4000,
+            "transactionCountry":"USA",
+            "customerId":"CUST8788"
+
+          }
     return ret
 
 
 
 
 def main(args):
-    logging.info('brokers={}'.format(args.brokers))
-    logging.info('topic={}'.format(args.topic))
-    logging.info('rate={}'.format(args.rate))
 
     logging.info('creating kafka producer')
     producer = KafkaProducer(bootstrap_servers=args.brokers)
 
     logging.info('begin sending events')
-    while True:
+
         event = generate_event()
-        customer = CUSTOMER[random.randint(0, 3)]
         logging.info('Customer %s :: Event%s',customer,event)
-        producer.send(args.topic, json.dumps(event).encode(), json.dumps(customer).encode())
-        time.sleep(10.0)
-    logging.info('end sending events')
+        producer.send(args.topic, json.dumps(event).encode())
+     logging.info('end sending events')
 
 
 

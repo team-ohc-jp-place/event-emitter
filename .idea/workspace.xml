@@ -104,7 +104,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619095842439</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="new commit">
+      <created>1619096347229</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619096347229</updated>
+    </task>
+    <task id="LOCAL-00003" summary="new commit">
+      <created>1619096578706</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1619096578706</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -121,14 +135,14 @@
     <option name="LAST_COMMIT_MESSAGE" value="new commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="505" y="90" width="900" height="933" key="CommitChangelistDialog2" timestamp="1619095842387">
+    <state x="505" y="90" width="900" height="933" key="CommitChangelistDialog2" timestamp="1619096578663">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="505" y="90" width="900" height="933" key="CommitChangelistDialog2/0.27.1920.1053@0.27.1920.1053" timestamp="1619095842387" />
-    <state x="555" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1619095850270">
+    <state x="505" y="90" width="900" height="933" key="CommitChangelistDialog2/0.27.1920.1053@0.27.1920.1053" timestamp="1619096578663" />
+    <state x="555" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1619096580650">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1619095850270" />
+    <state x="555" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/0.27.1920.1053@0.27.1920.1053" timestamp="1619096580650" />
     <state x="653" y="450" width="604" height="213" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1619095830449">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
