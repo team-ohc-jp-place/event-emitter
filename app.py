@@ -46,7 +46,7 @@ def main(args):
         event = generate_event()
         customer = CUSTOMER[random.randint(0, 1)]
         logging.info('Customer %s :: Event%s',customer,event)
-        producer.send(args.topic,json.dumps('{\"data\": '+event+'}').encode() , json.dumps(customer).encode())
+        producer.send(args.topic,json.dumps('{"data": '+event+'}').encode() , json.dumps(customer).encode())
         time.sleep(100000.0)
     logging.info('end sending events')
 
