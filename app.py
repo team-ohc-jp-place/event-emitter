@@ -10,13 +10,13 @@ from kafka import KafkaProducer
 
 EVENT_TEMPLATES = [
 
-   {
+  {"data": {
      "transactionId":"TXN866",
      "transactionAmount":4000,
      "transactionCountry":"USA",
      "customerId":"CUST8788"
 
-   }
+   }}
 ]
 
 
@@ -27,7 +27,7 @@ CUSTOMER = [
 ]
 
 def generate_event():
-    ret = EVENT_TEMPLATES[random.randint(0, 1)]
+    ret = EVENT_TEMPLATES[0]
     return ret
 
 
@@ -44,7 +44,7 @@ def main(args):
     logging.info('begin sending events')
     while True:
        
-        producer.send(args.topic,json.dumps('{"data":{"name":"john"}}').encode() , 'cust567'.encode())
+        producer.send(args.topic,json.dumps(generate_event()).encode() , 'cust567'.encode())
         time.sleep(100000.0)
     logging.info('end sending events')
 
