@@ -44,7 +44,7 @@ def main(args):
     logging.info('begin sending events')
     while True:
        
-        producer.send(args.topic,json.dumps('{"data": '+{"name":"john"}+'}').encode() , 'cust567'.encode())
+        producer.send(args.topic,json.dumps('{"data":{"name":"john"}}').encode() , 'cust567'.encode())
         time.sleep(100000.0)
     logging.info('end sending events')
 
