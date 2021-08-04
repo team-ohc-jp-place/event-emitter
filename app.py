@@ -10,13 +10,31 @@ from kafka import KafkaProducer
 
 EVENT_TEMPLATES = [
 
-  {"data": {
-     "transactionId":"TXN866",
-     "transactionAmount":4000,
-     "transactionCountry":"USA",
-     "customerId":"CUST8788"
-
-   }}
+    {
+        "specversion": "1.0",
+        "id": "a89b61a2-5644-487a-8a86-144855c5dce8",
+        "source": "SomeEventSource",
+        "type": "DecisionRequest",
+        "subject": "TheSubject",
+        "kogitodmnmodelname": "TransactionMonitoringDMN",
+        "kogitodmnmodelnamespace": "https://kiegroup.org/dmn/_EED47FB5-8A7C-44F3-A786-563FD2DAF015",
+        "data": {
+            "Transaction": { "transactionAmount": 9500,
+                             "transactionCountry":"US",
+                             "merchantType": "MERCH336",
+                             "transactionType":"Web" ,
+                             "transactionId":1626891159443,
+                             "paymentMode":"savings"},
+            "Customer": {
+                "averageTransactionAmount": 300,
+                "riskIndex": 1.7,
+                "marriage": false,
+                "jobChange": false,
+                "cityChange": false,
+                "customerId": "CUST898920"
+            }
+        }
+    }
 ]
 
 
