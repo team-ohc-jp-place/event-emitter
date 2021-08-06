@@ -61,9 +61,9 @@ def main(args):
 
     logging.info('begin sending events')
     while True:
-       
+
         producer.send(args.topic,json.dumps(generate_event()).encode() , 'cust567'.encode())
-        time.sleep(100000.0)
+        time.sleep(1000.0)
     logging.info('end sending events')
 
 
