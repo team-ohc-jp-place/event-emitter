@@ -28,9 +28,9 @@ EVENT_TEMPLATES = [
             "Customer": {
                 "averageTransactionAmount": 300,
                 "riskIndex": 1.7,
-                "marriage": "false",
-                "jobChange": "false",
-                "cityChange": "false",
+                "marriage": False,
+                "jobChange": False,
+                "cityChange": False,
                 "customerId": "CUST898920"
             }
         }
