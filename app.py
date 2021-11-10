@@ -16,18 +16,15 @@ EVENT_TEMPLATES = [
         "source": "SomeEventSource",
         "type": "DecisionRequest",
         "subject": "TheSubject",
-        "kogitodmnmodelname": "Traffic Violation",
+        "kogitodmnmodelname": "Order_Conversion",
         "kogitodmnmodelnamespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
         "data": {
-            "Driver": {
-                "Age": 25,
-                "Points": 13
-            },
-            "Violation": {
-                "Type": "speed",
-                "Actual Speed": 150,
-                "Speed Limit": 100
-            }
+            "OrderType": "E",
+            "OrderItemName": "Lime",
+            "Quantity": 100,
+            "Price": 3.69,
+            "ShipmentAddress": "541-428 Nulla Avenue",
+            "ZipCode": "4286"
         }
     }
 ]
