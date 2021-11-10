@@ -25,7 +25,7 @@ EVENT_TEMPLATES = [
             },
             "Violation": {
                 "Type": "speed",
-                "Actual Speed": 115,
+                "Actual Speed": 150,
                 "Speed Limit": 100
             }
         }
@@ -50,7 +50,7 @@ def main(args):
     while True:
 
         producer.send(args.topic,json.dumps(generate_event()).encode() , 'cust567'.encode())
-        time.sleep(1000.0)
+        time.sleep(10.0)
     logging.info('end sending events')
 
 
