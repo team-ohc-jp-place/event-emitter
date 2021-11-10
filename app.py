@@ -25,7 +25,8 @@ EVENT_TEMPLATES = [
             "Price": 3.69,
             "ShipmentAddress": "541-428 Nulla Avenue",
             "ZipCode": "4286"
-        },
+        }
+    },
     {
         "specversion": "1.0",
         "id": "a89b61a2-5644-487a-8a86-144855c5dce8",
