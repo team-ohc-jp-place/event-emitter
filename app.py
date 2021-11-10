@@ -16,39 +16,26 @@ EVENT_TEMPLATES = [
         "source": "SomeEventSource",
         "type": "DecisionRequest",
         "subject": "TheSubject",
-        "kogitodmnmodelname": "TransactionMonitoringDMN",
-        "kogitodmnmodelnamespace": "https://kiegroup.org/dmn/_EED47FB5-8A7C-44F3-A786-563FD2DAF015",
+        "kogitodmnmodelname": "Traffic Violation",
+        "kogitodmnmodelnamespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
         "data": {
-            "Transaction": { "transactionAmount": 9500,
-                             "transactionCountry":"US",
-                             "merchantType": "MERCH336",
-                             "transactionType":"Web" ,
-                             "transactionId":1626891159443,
-                             "paymentMode":"savings"},
-            "Customer": {
-                "averageTransactionAmount": 300,
-                "riskIndex": 1.7,
-                "marriage": False,
-                "jobChange": False,
-                "cityChange": False,
-                "customerId": "CUST898920"
+            "Driver": {
+                "Age": 25,
+                "Points": 13
+            },
+            "Violation": {
+                "Type": "speed",
+                "Actual Speed": 115,
+                "Speed Limit": 100
             }
         }
     }
 ]
 
 
-CUSTOMER = [
-
-
-    'CUST8788'
-]
-
 def generate_event():
     ret = EVENT_TEMPLATES[0]
     return ret
-
-
 
 
 def main(args):
