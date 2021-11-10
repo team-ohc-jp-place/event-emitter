@@ -17014,7 +17014,7 @@ EVENT_TEMPLATES = [
 
 
 def generate_event():
-    ret = EVENT_TEMPLATES[random.randrange(2)]
+    ret = EVENT_TEMPLATES[random.randrange(1000)]
     return ret
 
 
