@@ -25,13 +25,29 @@ EVENT_TEMPLATES = [
             "Price": 3.69,
             "ShipmentAddress": "541-428 Nulla Avenue",
             "ZipCode": "4286"
+        },
+    {
+        "specversion": "1.0",
+        "id": "a89b61a2-5644-487a-8a86-144855c5dce8",
+        "source": "SomeEventSource",
+        "type": "DecisionRequest",
+        "subject": "TheSubject",
+        "kogitodmnmodelname": "Order_Conversion",
+        "kogitodmnmodelnamespace": "https://github.com/kiegroup/drools/kie-dmn/_A4BCA8B8-CF08-433F-93B2-A2598F19ECFF",
+        "data": {
+            "OrderType": "E",
+            "OrderItemName": "Lemon Bar",
+            "Quantity": 17,
+            "Price": 0.09,
+            "ShipmentAddress": "Ap #249-5876 Magna. Rd.",
+            "ZipCode": "I9E 0JN"
         }
     }
 ]
 
 
 def generate_event():
-    ret = EVENT_TEMPLATES[0]
+    ret = EVENT_TEMPLATES[random.randrange(2)]
     return ret
 
 
@@ -49,8 +65,6 @@ def main(args):
         producer.send(args.topic,json.dumps(generate_event()).encode() , 'cust567'.encode())
         time.sleep(10.0)
     logging.info('end sending events')
-
-
 
 
 def get_arg(env, default):
